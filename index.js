@@ -18,7 +18,16 @@ app.get('/', function (req, res) {
   res.send('Hello Worldasd')
 })
 app.get('/hello', function (req, res) {
-  res.send('envio de Hello')
+  const sql = 'SELECT nombre FROM usuarios where ID = 4'
+    conexion.query(sql, (err, results) =>{
+        if(err) throw err;
+        if(results.length > 0){
+            res.json(results);
+        }  else {
+            res.send("No hay resultados")
+        }
+
+    });
 })
 
 app.post('/webhook', express.json(), function (req, res) {
@@ -31,7 +40,7 @@ app.post('/webhook', express.json(), function (req, res) {
     conexion.query(sql, (err, results) =>{
         if(err) throw err;
         if(results.length > 0){
-            res.json(results);
+            // res.json(results);
             agent.add(`Agregue usuario`, results);
         }  else {
             res.send("No hay resultados")
