@@ -18,16 +18,7 @@ app.get('/', function (req, res) {
   res.send('Hello Worldasd')
 })
 app.get('/hello', function (req, res) {
-  const sql = 'SELECT nombre FROM usuarios where ID = 4'
-    conexion.query(sql, (err, results) =>{
-        if(err) throw err;
-        if(results.length > 0){
-            res.json(results);
-        }  else {
-            res.send("No hay resultados")
-        }
-
-    });
+  res.send('envio de Hello')
 })
 
 app.post('/webhook', express.json(), function (req, res) {
@@ -35,34 +26,22 @@ app.post('/webhook', express.json(), function (req, res) {
   // console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
   // console.log('Dialogflow Request body: ' + JSON.stringify(req.body));
  
-  function ProbandoWebhook(agent) {
-    const sql = 'SELECT nombre FROM usuarios where ID = 4'
-    conexion.query(sql, (err, results) =>{
-        if(err) throw err;
-        if(results.length > 0){
-            // res.json(results);
-            agent.add(`Agregue usuario`, results);
-        }  else {
-            res.send("No hay resultados")
-        }
-
-    });
-   
+  function welcome(agent) {
+    agent.add(`Welcome to my agent!`);
   }
  
   function fallback(agent) {
     agent.add(`I didn't understand`);
     agent.add(`I'm sorry, can you try again?`);
   }
-  // function ProbandoWebhook(agent) {
-  //   agent.add(`Estoy enviando desde el webHook`);
-  // }
+  function ProbandoWebhook(agent) {
+    agent.add(`Estoy enviando desde el webHook`);
+  }
 
   
   let intentMap = new Map();
-  // intentMap.set('Default Welcome Intent', welcome);
+  intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
-  // intentMap.set('ProbandoWebhook', ProbandoWebhook);
   intentMap.set('ProbandoWebhook', ProbandoWebhook);
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
