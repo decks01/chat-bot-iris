@@ -9,7 +9,7 @@ app.get('/', function (req, res) {
   res.send('Hello Worldasd')
 })
 app.get('/hello', function (req, res) {
-  res.send('Hello Worldasd')
+  res.send('envio de Hello')
 })
 
 app.post('/webhook', express.json(), function (req, res) {
