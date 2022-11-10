@@ -4,7 +4,7 @@ const app = express()
 const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 app.get('/', function (req, res) {
   res.send('Hello Worldasd')
 })
