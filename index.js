@@ -60,7 +60,7 @@ app.post('/webhook', express.json(), function (req, res) {
 
   
   let intentMap = new Map();
-  intentMap.set('Default Welcome Intent', welcome);
+  // intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
   // intentMap.set('ProbandoWebhook', ProbandoWebhook);
   intentMap.set('ProbandoWebhook', ProbandoWebhook);
