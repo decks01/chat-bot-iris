@@ -7,8 +7,7 @@ const mysql = require('mysql')
 
 const conexion = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-      
+  user: 'root',  
   password: '',
   database: 'ficha_servicio'
 });
@@ -29,14 +28,31 @@ app.post('/webhook', express.json(), function (req, res) {
   function welcome(agent) {
     agent.add(`Welcome to my agent!`);
   }
+
+  function ProbandoWebhook(agent) {
+    agent.add(`INtento ingresar a SELECT!`);
+    const sql = 'SELECT name from usuarios where ID = 1'
+      conexion.query(sql, (err, results) =>{
+          if(err) throw err;
+          if(results.length > 0){
+              // res.json(results);
+              agent.add(`Datos agregados!`);
+          }  else {
+              // res.send("No hay resultados")
+              agent.add(`No hay nada`);
+
+          }
+
+      });
+  }
  
   function fallback(agent) {
     agent.add(`I didn't understand`);
     agent.add(`I'm sorry, can you try again?`);
   }
-  function ProbandoWebhook(agent) {
-    agent.add(`Estoy enviando desde el webHook`);
-  }
+  // function ProbandoWebhook(agent) {
+  //   agent.add(`Estoy enviando desde el webHook`);
+  // }
 
   
   let intentMap = new Map();
