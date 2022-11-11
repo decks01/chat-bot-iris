@@ -36,7 +36,7 @@ app.post('/webhook', express.json(), function (req, res) {
           if(err) throw err;
           if(results.length > 0){
               // res.json(results);
-              agent.add(`Datos agregados!`);
+              agent.add(`Datos agregados!`, results.name);
           }  else {
               // res.send("No hay resultados")
               agent.add(`No hay nada`);
